@@ -1,295 +1,251 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>ChaoticSMP Rankings</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moonlight Fire</title>
 
 <style>
 body {
-  margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#020617,#0f172a,#1e1b4b);
-  color:white;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #0a0a0a, #000000);
+    color: white;
+    overflow-x: hidden;
 }
 
+/* PARTICLES */
+#particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* NAVBAR */
 .navbar {
-  display:flex;
-  justify-content:space-between;
-  padding:15px;
-  background:rgba(2,6,23,0.8);
-  backdrop-filter:blur(10px);
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
 }
 
 .logo {
-  font-weight:bold;
-  font-size:20px;
-  background:linear-gradient(90deg,#a855f7,#c084fc,#7c3aed,#a855f7);
-  background-size:300%;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:rgbMove 4s linear infinite;
-  text-shadow:0 0 12px rgba(168,85,247,0.8);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-@keyframes rgbMove {
-  0% {background-position:0%}
-  100% {background-position:300%}
+/* SVG LOGO */
+.mlf-logo {
+    width: 45px;
+    height: 45px;
+    animation: glowPulse 2s infinite alternate;
 }
 
-.search {
-  background:#1e293b;
-  border:none;
-  padding:8px;
-  border-radius:8px;
-  color:white;
+@keyframes glowPulse {
+    from {
+        filter: drop-shadow(0 0 5px #ffaa00)
+                drop-shadow(0 0 10px #ff8800);
+    }
+    to {
+        filter: drop-shadow(0 0 15px #ffaa00)
+                drop-shadow(0 0 30px #ff6600);
+    }
 }
 
-.player {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:10px;
-  padding:12px;
-  border-radius:12px;
-  background:rgba(2,6,23,0.8);
-  border:1px solid #1e293b;
-  transition:0.25s;
-}
-.player:hover {
-  transform:scale(1.02);
-  background:#0f172a;
-  box-shadow:0 0 20px rgba(168,85,247,0.3);
+.fire {
+    animation: fireMove 1.5s infinite ease-in-out;
 }
 
-.left {
-  display:flex;
-  align-items:center;
+@keyframes fireMove {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1) rotate(2deg); }
+    100% { transform: scale(1); }
 }
 
-.rank-box {
-  width:55px;
-  height:40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  clip-path:polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-  margin-right:10px;
+.logo span {
+    font-size: 18px;
+    text-shadow: 0 0 10px orange;
 }
 
-.top1 {background:linear-gradient(45deg,gold,#facc15);color:black;}
-.top2 {background:linear-gradient(45deg,#e5e7eb,#9ca3af);color:black;}
-.top3 {background:linear-gradient(45deg,#cd7f32,#b45309);color:black;}
+/* HEADER ANIMATION */
+.header {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-shadow: 0 0 10px #ff9900, 0 0 25px #ff6600;
 
-.skin {
-  width:50px;
-  height:auto;
-  margin-right:10px;
-  object-fit:contain;
-  background-color:transparent;
-  border-radius:4px;
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: fadeDown 1s ease forwards;
 }
 
-.name {
-  font-weight:bold;
-  font-size:14px;
-  color:#e5e7eb;
+@keyframes fadeDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.sub {
-  font-size:11px;
-  color:#9ca3af;
-  display:flex;
-  align-items:center;
-  gap:6px;
+/* CARD */
+.card {
+    background: linear-gradient(145deg, #0a0a0a, #000000);
+    border-radius: 20px;
+    margin: 20px;
+    padding: 25px;
+    box-shadow: 0 0 20px rgba(255,140,0,0.4);
+    border: 1px solid rgba(255,140,0,0.3);
+    transition: 0.3s;
 }
 
-.rank-icon {
-  color:#a855f7;
-  font-size:10px;
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 0 40px rgba(255,140,0,0.8);
 }
 
-.region {
-  background:#22c55e;
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
+/* TITLE */
+.title {
+    font-size: 26px;
+    color: #ff9900;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #ff6600;
 }
 
-.tiers {
-  display:flex;
-  gap:10px;
+/* TEXT */
+.text {
+    color: #ccc;
+    line-height: 1.7;
 }
 
-.tier {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  font-size:9px;
+/* BUTTON */
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 25px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #ff9900, #ff5500);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 0 15px #ff6600;
+    transition: 0.3s;
 }
 
-.circle {
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:#020617;
-  border:2px solid #1e293b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:13px;
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px #ff9900;
 }
 
-.ht1 .circle {border-color:#facc15;}
-.ht2 .circle {border-color:#fb923c;}
-.ht3 .circle {border-color:#f87171;}
-.lt1 .circle {border-color:#22c55e;}
-.lt2 .circle {border-color:#3b82f6;}
-.lt3 .circle {border-color:#a78bfa;}
-
-/* Style placeholder untuk skin yang tidak bisa diakses */
-.skin-placeholder {
-  background:linear-gradient(45deg,#1e293b,#0f172a);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-  width:50px;
-  height:60px;
+.btn:active {
+    transform: scale(0.95);
 }
 </style>
 </head>
 
 <body>
 
+<canvas id="particles"></canvas>
+
+<!-- NAVBAR -->
 <div class="navbar">
-  <div class="logo">⚔️ ChaoticSMP</div>
-  <input class="search" placeholder="Search player...">
+<div class="logo">
+
+<svg class="mlf-logo" viewBox="0 0 120 90">
+
+<defs>
+<linearGradient id="white-grad">
+<stop offset="0%" stop-color="#ffffff"/>
+<stop offset="100%" stop-color="#cccccc"/>
+</linearGradient>
+
+<linearGradient id="fire-grad">
+<stop offset="0%" stop-color="#ffd54f"/>
+<stop offset="50%" stop-color="#ff9800"/>
+<stop offset="100%" stop-color="#ff5722"/>
+</linearGradient>
+</defs>
+
+<path d="M10,15 L18,75 L30,40 L42,75 L50,15 L40,15 L32,55 L24,15 Z" fill="url(#white-grad)"/>
+<path d="M55,15 L55,75 L80,75 L80,65 L65,65 L65,15 Z" fill="url(#white-grad)"/>
+
+<g class="fire">
+<path d="M85,15 C110,5 120,40 100,60 C90,70 70,60 75,45 C80,35 95,35 90,25 C85,15 75,20 85,15 Z" fill="url(#fire-grad)"/>
+<path d="M92,30 C105,35 100,55 85,60 C75,63 70,50 78,42 C82,38 88,35 92,30 Z" fill="#fff3e0"/>
+</g>
+
+</svg>
+
+<span>Moonlight Fire</span>
+</div>
 </div>
 
-<div id="board"></div>
+<!-- TITLE -->
+<div class="header">MOONLIGHT FIRE</div>
+
+<!-- ABOUT -->
+<div class="card">
+<div class="title">About Moonlight Fire</div>
+<div class="text">
+Moonlight Fire bukan clan yang bisa dianggap remeh. Dengan presisi yang tajam seperti sinar bulan dan semangat yang tak padam seperti api, kami selalu berada di depan lawan. Kontrol permainan kurang stabil? Strategi masih belum pas? Lebih baik fokus dulu pada kemampuanmu. Di sini hanya pemain yang mampu membuat lawan tertekan dan bingung sebelum mereka bisa melakukan apapun.
+</div>
+</div>
+
+<!-- DISCORD -->
+<div class="card">
+<div class="title">Discord Moonlight Fire</div>
+<div class="text">
+Masuk discord Moonlightfire 
+</div>
+<a href="https://discord.gg/ZfurHYPwa" target="_blank" class="btn">
+Join Discord
+</a>
+</div>
 
 <script>
-const data = [
-  {name:"Sanonruh77",points:1500}, // Top 1
-  {name:"ZieexakaYT",points:1200}, // Top 2
-  {name:"Henryjoe2",points:1100}, // Top 3
-  {name:"ZerathTatsuu",points:1080}, // Top 4
-  {name:"Zayzgaming24",points:1050}, // Top 5
-  {name:"IfaanMC8192",points:1020}, // Top 6
-  {name:"Calmejuan",points:1000}, // Top 7
-  {name:"Kagurath1",points:980},
-  {name:"Lurrrnn4005",points:900},
-  {name:"zenonityx",points:870},
-  {name:"by240",points:850},
-  {name:"RapaMC",points:830},
-  {name:"Alberto11385",points:800},
-  {name:"Fexxy73",points:780},
-  {name:"KimmyyMC",points:760},
-  {name:"HappyApple",points:740},
-  {name:"Dirgafang",points:720},
-  {name:"Lingnott",points:700}
-].map((p,i)=>({
-  ...p,
-  rank:i+1
-}));
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
 
-function randomTier(){
-  const types=["ht1","ht2","ht3","lt1","lt2","lt3"];
-  const icons=["⚔️","❤️","🧪","🛡️","💀","🏹"];
-  return Array.from({length:7},()=>({
-    type:types[Math.floor(Math.random()*types.length)],
-    icon:icons[Math.floor(Math.random()*icons.length)]
-  }));
+function resize(){
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+let particles = [];
+
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*3+1,
+speedY:Math.random()*1+0.3
+});
 }
 
-function render(list){
-  let board=document.getElementById("board");
-  board.innerHTML="";
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  list.forEach((p)=>{
-    let rankClass = p.rank===1?"top1":p.rank===2?"top2":p.rank===3?"top3":"";
+particles.forEach(p=>{
+ctx.fillStyle="orange";
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+ctx.fill();
 
-    // URL skin menggunakan format s.namemc.com yang benar
-    let skinUrl = "";
-    if(p.name === 'Sanonruh77'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=a8edfa48d85da775&model=slim';
-    } else if(p.name === 'IfaanMC8192'){
-      // Ganti dengan format Namemc yang bisa tampilkan gambar skin
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=d215c2c354f539ae&model=slim';
-    } else if(p.name === 'Calmejuan'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=ca7e022b7ee4e762&model=slim';
-    } else if(p.name === 'Henryjoe2'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=135deb13c5e54a60&model=slim';
-    } else if(p.name === 'Zayzgaming24'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=1e8a2fbba2df08b1&model=slim';
-    } else if(p.name === 'ZerathTatsuu'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=579e4c2063571440&model=slim';
-    } else if(p.name === 'Kagurath1'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=a72f68612ab23526&model=slim';
-    } else if(p.name === 'Alberto11385'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=13ce9ceddd82fd32&model=slim';
-    } else if(p.name === 'ZieexakaYT'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=9b9bec2b5594d825&model=slim';
-    } else if(p.name === 'Lurrrnn4005'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=ade1f60a0b91b047&model=slim';
-    } else if(p.name === 'zenonityx'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=6651adcb873eaab0&model=slim';
-    } else if(p.name === 'by240'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=c72876753d9984e6&model=slim';
-    } else if(p.name === 'RapaMC'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=5198627ebd0361a8&model=slim';
-    } else if(p.name === 'Fexxy73'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=8a59a938162acc26&model=slim';
-    } else if(p.name === 'HappyApple'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=4ae0b193aaf5e8da&model=slim';
-    } else {
-      skinUrl = `https://s.namemc.com/3d/skin/body.png?user=${p.name}&model=slim`;
-    }
+p.y-=p.speedY;
 
-    board.innerHTML+=`
-    <div class="player">
-      
-      <div class="left">
-        <div class="rank-box ${rankClass}">${p.rank}</div>
-
-        <img class="skin" src="${skinUrl}" 
-          onerror="this.classList.add('skin-placeholder'); this.src=''; this.innerHTML='<span>🎮</span>'">
-
-        <div>
-          <div class="name">${p.name}</div>
-          <div class="sub">
-            <span class="rank-icon">◆</span>
-            ${p.name === 'Sanonruh77' ? 'Legendary Master (1500 points)' : (p.name === 'HappyApple' ? 'Combat Master (740 points) • Happy' : `Combat Master (${p.points} points)`)}
-          </div>
-        </div>
-      </div>
-
-      <div class="region">AS</div>
-
-      <div class="tiers">
-        ${randomTier().map(t=>`
-          <div class="tier ${t.type}">
-            <div class="circle">${t.icon}</div>
-            <div>${t.type.toUpperCase()}</div>
-          </div>
-        `).join("")}
-      </div>
-
-    </div>
-    `;
-  });
+if(p.y<0){
+p.y=canvas.height;
+p.x=Math.random()*canvas.width;
 }
-
-document.querySelector(".search").addEventListener("input", e=>{
-  let val=e.target.value.toLowerCase();
-  render(data.filter(p=>p.name.toLowerCase().includes(val)));
 });
 
-render(data);
+requestAnimationFrame(draw);
+}
+
+draw();
 </script>
 
 </body>
-</html>
+  </html>
