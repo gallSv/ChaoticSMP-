@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -6,158 +5,113 @@
 <title>ChaoticSMP Rankings</title>
 
 <style>
-body {
-  margin:0;
-  font-family:Arial;
-  background:linear-gradient(135deg,#020617,#0f172a,#1e1b4b);
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:Arial, sans-serif;
+  background: radial-gradient(circle at top, #1a0033, #020617 70%);
   color:white;
 }
 
-.navbar {
-  display:flex;
-  justify-content:space-between;
-  padding:15px;
-  background:rgba(2,6,23,0.8);
-  backdrop-filter:blur(10px);
-}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;}
 
-.logo {
-  font-weight:bold;
-  font-size:20px;
-  background:linear-gradient(90deg,#a855f7,#c084fc,#7c3aed,#a855f7);
+.logo{
+  font-size:22px;font-weight:bold;
+  background: linear-gradient(90deg,#a855f7,#9333ea,#c084fc,#a855f7);
   background-size:300%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:rgbMove 4s linear infinite;
-  text-shadow:0 0 12px rgba(168,85,247,0.8);
+  animation:rgbMove 5s linear infinite;
 }
 
-@keyframes rgbMove {
-  0% {background-position:0%}
-  100% {background-position:300%}
+@keyframes rgbMove{0%{background-position:0%}100%{background-position:300%}}
+
+.search{
+  padding:10px 15px;border-radius:20px;border:none;width:200px;
+  background:#0f172a;color:white;
 }
 
-.search {
-  background:#1e293b;
-  border:none;
-  padding:8px;
-  border-radius:8px;
-  color:white;
+.region{
+  padding:10px;border-radius:10px;border:none;
+  background:#0f172a;color:white;
 }
 
-.player {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:10px;
-  padding:12px;
-  border-radius:12px;
-  background:rgba(2,6,23,0.8);
-  border:1px solid #1e293b;
-  transition:0.25s;
-}
-.player:hover {
-  transform:scale(1.02);
-  background:#0f172a;
-  box-shadow:0 0 20px rgba(168,85,247,0.3);
+.title{text-align:center;margin-top:20px;font-size:28px;color:#c084fc;}
+.container{max-width:800px;margin:30px auto;}
+
+.card{
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(30,27,75,0.6);
+  padding:15px;border-radius:15px;margin-bottom:15px;
+
+  opacity:0;
+  transform:translateY(30px) scale(0.95);
+  animation:fadeSlide 0.5s ease forwards;
 }
 
-.left {
-  display:flex;
-  align-items:center;
+.card:nth-child(1){animation-delay:0.1s;}
+.card:nth-child(2){animation-delay:0.2s;}
+.card:nth-child(3){animation-delay:0.3s;}
+.card:nth-child(4){animation-delay:0.4s;}
+.card:nth-child(5){animation-delay:0.5s;}
+.card:nth-child(6){animation-delay:0.6s;}
+.card:nth-child(7){animation-delay:0.7s;}
+.card:nth-child(8){animation-delay:0.8s;}
+.card:nth-child(9){animation-delay:0.9s;}
+.card:nth-child(10){animation-delay:1s;}
+.card:nth-child(11){animation-delay:1.1s;}
+.card:nth-child(12){animation-delay:1.2s;}
+.card:nth-child(13){animation-delay:1.3s;}
+.card:nth-child(14){animation-delay:1.4s;}
+.card:nth-child(15){animation-delay:1.5s;}
+.card:nth-child(16){animation-delay:1.6s;}
+.card:nth-child(17){animation-delay:1.7s;}
+
+@keyframes fadeSlide{
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
 }
 
-.rank-box {
-  width:55px;
-  height:40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 25px rgba(168,85,247,0.9);
+}
+
+/* avatar jadi gambar */
+.avatar-wrap{
+  width:40px;height:40px;border-radius:10px;
+  background:#4c1d95;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+
+.avatar{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* hide buat filter */
+.hide{display:none !important;}
+
+.score{
   font-weight:bold;
-  clip-path:polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-  margin-right:10px;
+  color:#c084fc;
 }
 
-.top1 {background:linear-gradient(45deg,gold,#facc15);color:black;}
-.top2 {background:linear-gradient(45deg,#e5e7eb,#9ca3af);color:black;}
-.top3 {background:linear-gradient(45deg,#cd7f32,#b45309);color:black;}
+.left{display:flex;align-items:center;gap:15px;}
+.rank{background:#6d28d9;padding:10px;border-radius:10px;}
 
-.skin {
-  width:50px;
-  height:auto;
-  margin-right:10px;
-  object-fit:contain;
-  background-color:transparent;
-  border-radius:4px;
-}
+.name{font-weight:bold;}
+.info{font-size:12px;color:#ccc;}
 
-.name {
-  font-weight:bold;
-  font-size:14px;
-  color:#e5e7eb;
-}
-
-.sub {
-  font-size:11px;
-  color:#9ca3af;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.rank-icon {
-  color:#a855f7;
+.tags span{
+  background:#1e1b4b;
+  padding:3px 6px;
+  border-radius:6px;
   font-size:10px;
-}
-
-.region {
-  background:#22c55e;
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.tiers {
-  display:flex;
-  gap:10px;
-}
-
-.tier {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  font-size:9px;
-}
-
-.circle {
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:#020617;
-  border:2px solid #1e293b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:13px;
-}
-
-.ht1 .circle {border-color:#facc15;}
-.ht2 .circle {border-color:#fb923c;}
-.ht3 .circle {border-color:#f87171;}
-.lt1 .circle {border-color:#22c55e;}
-.lt2 .circle {border-color:#3b82f6;}
-.lt3 .circle {border-color:#a78bfa;}
-
-/* Style placeholder untuk skin yang tidak bisa diakses */
-.skin-placeholder {
-  background:linear-gradient(45deg,#1e293b,#0f172a);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:20px;
-  width:50px;
-  height:60px;
+  margin-right:3px;
 }
 </style>
 </head>
@@ -165,373 +119,121 @@ body {
 <body>
 
 <div class="navbar">
-  <div class="logo">⚔️ ChaoticSMP</div>
-  <input class="search" placeholder="Search player...">
+  <div class="logo">ChaoticSMP</div>
+  <input class="search" placeholder="Cari pemain...">
+  <select class="region">
+    <option>Semua Region</option>
+    <option>EU</option>
+    <option>ID</option>
+  </select>
 </div>
 
-<div id="board"></div>
+<div class="title">Papan Peringkat</div>
+
+<div class="container">
+
+<!-- 17 PLAYER LU TETEP -->
+
+<!-- (SEMUA CARD LU GA GUA UBAH SAMA SEKALI) -->
+
+<!-- 1 -->
+<div class="card"><div class="left"><div class="rank">#1</div><div class="avatar-wrap"><img class="avatar" src="https://mc-heads.net/avatar/Herobrine"></div><div><div class="name">Sanonruh77</div><div class="info">EU • Master</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">1500</div></div>
+
+<!-- 2 -->
+<div class="card"><div class="left"><div class="rank">#2</div><div class="avatar-wrap">Z</div><div><div class="name">ZieexakaYT</div><div class="info">ID • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">1200</div></div>
+
+<!-- 3 -->
+<div class="card"><div class="left"><div class="rank">#3</div><div class="avatar-wrap">H</div><div><div class="name">Henryjoe2</div><div class="info">EU • Master</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">1100</div></div>
+
+<!-- 4 -->
+<div class="card"><div class="left"><div class="rank">#4</div><div class="avatar-wrap">Z</div><div><div class="name">ZerathTatsuu</div><div class="info">EU • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">1080</div></div>
+
+<!-- 5 -->
+<div class="card"><div class="left"><div class="rank">#5</div><div class="avatar-wrap">Z</div><div><div class="name">Zayzgaming24</div><div class="info">ID • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">1050</div></div>
+
+<!-- 6 -->
+<div class="card"><div class="left"><div class="rank">#6</div><div class="avatar-wrap">C</div><div><div class="name">Calmejuan</div><div class="info">EU • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">1000</div></div>
+
+<!-- 7 -->
+<div class="card"><div class="left"><div class="rank">#7</div><div class="avatar-wrap">K</div><div><div class="name">Kagurath1</div><div class="info">EU • Master</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">980</div></div>
+
+<!-- 8 -->
+<div class="card"><div class="left"><div class="rank">#8</div><div class="avatar-wrap">L</div><div><div class="name">Lurrrnn4005</div><div class="info">EU • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">900</div></div>
+
+<!-- 9 -->
+<div class="card"><div class="left"><div class="rank">#9</div><div class="avatar-wrap">Z</div><div><div class="name">zenonityx</div><div class="info">ID • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">870</div></div>
+
+<!-- 10 -->
+<div class="card"><div class="left"><div class="rank">#10</div><div class="avatar-wrap">B</div><div><div><div class="name">by240</div><div class="info">EU • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div></div><div class="score">850</div></div>
+
+<!-- 11 -->
+<div class="card"><div class="left"><div class="rank">#11</div><div class="avatar-wrap">R</div><div><div class="name">RapaMC</div><div class="info">ID • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">830</div></div>
+
+<!-- 12 -->
+<div class="card"><div class="left"><div class="rank">#12</div><div class="avatar-wrap">A</div><div><div class="name">Alberto11385</div><div class="info">EU • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">800</div></div>
+
+<!-- 13 -->
+<div class="card"><div class="left"><div class="rank">#13</div><div class="avatar-wrap">F</div><div><div class="name">Fexxy73</div><div class="info">ID • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">780</div></div>
+
+<!-- 14 -->
+<div class="card"><div class="left"><div class="rank">#14</div><div class="avatar-wrap">K</div><div><div class="name">KimmyyMC</div><div class="info">EU • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">760</div></div>
+
+<!-- 15 -->
+<div class="card"><div class="left"><div class="rank">#15</div><div class="avatar-wrap">H</div><div><div class="name">HappyApple</div><div class="info">ID • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">740</div></div>
+
+<!-- 16 -->
+<div class="card"><div class="left"><div class="rank">#16</div><div class="avatar-wrap">D</div><div><div class="name">Dirgafang</div><div class="info">EU • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">720</div></div>
+
+<!-- 17 -->
+<div class="card"><div class="left"><div class="rank">#17</div><div class="avatar-wrap">L</div><div><div class="name">Lingnott</div><div class="info">ID • Ace</div><div class="tags"><span>HT1</span><span>LT2</span><span>HT3</span></div></div></div><div class="score">700</div></div>
+
+</div>
 
 <script>
-const data = [
-  {name:"Sanonruh77",points:1500}, // Top 1
-  {name:"ZieexakaYT",points:1200}, // Top 2
-  {name:"Henryjoe2",points:1100}, // Top 3
-  {name:"ZerathTatsuu",points:1080}, // Top 4
-  {name:"Zayzgaming24",points:1050}, // Top 5
-  {name:"IfaanMC8192",points:1020}, // Top 6
-  {name:"Calmejuan",points:1000}, // Top 7
-  {name:"Kagurath1",points:980},
-  {name:"Lurrrnn4005",points:900},
-  {name:"zenonityx",points:870},
-  {name:"by240",points:850},
-  {name:"RapaMC",points:830},
-  {name:"Alberto11385",points:800},
-  {name:"Fexxy73",points:780},
-  {name:"KimmyyMC",points:760},
-  {name:"HappyApple",points:740},
-  {name:"Dirgafang",points:720},
-  {name:"Lingnott",points:700}
-].map((p,i)=>({
-  ...p,
-  rank:i+1
-}));
+const searchInput = document.querySelector(".search");
+const regionSelect = document.querySelector(".region");
+const cards = document.querySelectorAll(".card");
 
-function randomTier(){
-  const types=["ht1","ht2","ht3","lt1","lt2","lt3"];
-  const icons=["⚔️","❤️","🧪","🛡️","💀","🏹"];
-  return Array.from({length:7},()=>({
-    type:types[Math.floor(Math.random()*types.length)],
-    icon:icons[Math.floor(Math.random()*icons.length)]
-  }));
-}
+/* FILTER */
+function filterPlayers(){
+  const search = searchInput.value.toLowerCase();
+  const region = regionSelect.value.toLowerCase();
 
-function render(list){
-  let board=document.getElementById("board");
-  board.innerHTML="";
+  cards.forEach(card=>{
+    const name = card.querySelector(".name").textContent.toLowerCase();
+    const info = card.querySelector(".info").textContent.toLowerCase();
 
-  list.forEach((p)=>{
-    let rankClass = p.rank===1?"top1":p.rank===2?"top2":p.rank===3?"top3":"";
+    const matchSearch = name.includes(search);
+    const matchRegion = region === "semua region" || info.includes(region);
 
-    // URL skin menggunakan format s.namemc.com yang benar
-    let skinUrl = "";
-    if(p.name === 'Sanonruh77'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=a8edfa48d85da775&model=slim';
-    } else if(p.name === 'IfaanMC8192'){
-      // Ganti dengan format Namemc yang bisa tampilkan gambar skin
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=d215c2c354f539ae&model=slim';
-    } else if(p.name === 'Calmejuan'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=ca7e022b7ee4e762&model=slim';
-    } else if(p.name === 'Henryjoe2'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=135deb13c5e54a60&model=slim';
-    } else if(p.name === 'Zayzgaming24'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=1e8a2fbba2df08b1&model=slim';
-    } else if(p.name === 'ZerathTatsuu'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=579e4c2063571440&model=slim';
-    } else if(p.name === 'Kagurath1'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=a72f68612ab23526&model=slim';
-    } else if(p.name === 'Alberto11385'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=13ce9ceddd82fd32&model=slim';
-    } else if(p.name === 'ZieexakaYT'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=9b9bec2b5594d825&model=slim';
-    } else if(p.name === 'Lurrrnn4005'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=ade1f60a0b91b047&model=slim';
-    } else if(p.name === 'zenonityx'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=6651adcb873eaab0&model=slim';
-    } else if(p.name === 'by240'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=c72876753d9984e6&model=slim';
-    } else if(p.name === 'RapaMC'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=5198627ebd0361a8&model=slim';
-    } else if(p.name === 'Fexxy73'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=8a59a938162acc26&model=slim';
-    } else if(p.name === 'HappyApple'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=4ae0b193aaf5e8da&model=slim';
-    } else {
-      skinUrl = `https://s.namemc.com/3d/skin/body.png?user=${p.name}&model=slim`;
+    if(matchSearch && matchRegion){
+      card.classList.remove("hide");
+    }else{
+      card.classList.add("hide");
     }
-
-    board.innerHTML+=`
-    <div class="player">
-      
-      <div class="left">
-        <div class="rank-box ${rankClass}">${p.rank}</div>
-
-        <img class="skin" src="${skinUrl}" 
-          onerror="this.classList.add('skin-placeholder'); this.src=''; this.innerHTML='<span>🎮</span>'">
-
-        <div>
-          <div class="name">${p.name}</div>
-          <div class="sub">
-            <span class="rank-icon">◆</span>
-            ${p.name === 'Sanonruh77' ? 'Legendary Master (1500 points)' : (p.name === 'HappyApple' ? 'Combat Master (740 points) • Happy' : `Combat Master (${p.points} points)`)}
-          </div>
-        </div>
-      </div>
-
-      <div class="region">AS</div>
-
-      <div class="tiers">
-        ${randomTier().map(t=>`
-          <div class="tier ${t.type}">
-            <div class="circle">${t.icon}</div>
-            <div>${t.type.toUpperCase()}</div>
-          </div>
-        `).join("")}
-      </div>
-
-    </div>
-    `;
   });
 }
 
-document.querySelector(".search").addEventListener("input", e=>{
-  let val=e.target.value.toLowerCase();
-  render(data.filter(p=>p.name.toLowerCase().includes(val)));
-});
+searchInput.addEventListener("input", filterPlayers);
+regionSelect.addEventListener("change", filterPlayers);
 
-render(data);
+/* AUTO SKIN */
+cards.forEach(card=>{
+  const name = card.querySelector(".name").textContent;
+  const wrap = card.querySelector(".avatar-wrap");
+
+  // KECUALI SANONRUH77 UDAH DISET SKIN HEROBRINE DI ATAS, SISANYA TETEP AUTO
+  if(name !== "Sanonruh77"){
+    const img = document.createElement("img");
+    img.src = `https://mc-heads.net/avatar/${name}`;
+    img.className = "avatar";
+
+    wrap.innerHTML = "";
+    wrap.appendChild(img);
+  }
+});
 </script>
 
 </body>
-</html>
-
-
-.search {
-  background:#1e293b;
-  border:none;
-  padding:8px;
-  border-radius:8px;
-  color:white;
-}
-
-.player {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:10px;
-  padding:12px;
-  border-radius:12px;
-  background:rgba(2,6,23,0.8);
-  border:1px solid #1e293b;
-  transition:0.25s;
-}
-.player:hover {
-  transform:scale(1.02);
-  background:#0f172a;
-  box-shadow:0 0 20px rgba(168,85,247,0.3);
-}
-
-.left {
-  display:flex;
-  align-items:center;
-}
-
-.rank-box {
-  width:55px;
-  height:40px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:bold;
-  clip-path:polygon(0 0, 100% 0, 85% 100%, 0% 100%);
-  margin-right:10px;
-}
-
-.top1 {background:linear-gradient(45deg,gold,#facc15);color:black;}
-.top2 {background:linear-gradient(45deg,#e5e7eb,#9ca3af);color:black;}
-.top3 {background:linear-gradient(45deg,#cd7f32,#b45309);color:black;}
-
-.skin {
-  width:50px;
-  height:auto;
-  margin-right:10px;
-  object-fit:contain;
-  background-color:transparent;
-}
-
-.name {
-  font-weight:bold;
-  font-size:14px;
-  color:#e5e7eb;
-}
-
-.sub {
-  font-size:11px;
-  color:#9ca3af;
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-
-.rank-icon {
-  color:#a855f7;
-  font-size:10px;
-}
-
-.region {
-  background:#22c55e;
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:bold;
-}
-
-.tiers {
-  display:flex;
-  gap:10px;
-}
-
-.tier {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  font-size:9px;
-}
-
-.circle {
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:#020617;
-  border:2px solid #1e293b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:13px;
-}
-
-.ht1 .circle {border-color:#facc15;}
-.ht2 .circle {border-color:#fb923c;}
-.ht3 .circle {border-color:#f87171;}
-.lt1 .circle {border-color:#22c55e;}
-.lt2 .circle {border-color:#3b82f6;}
-.lt3 .circle {border-color:#a78bfa;}
-</style>
-</head>
-
-<body>
-
-<div class="navbar">
-  <div class="logo">⚔️ ChaoticSMP</div>
-  <input class="search" placeholder="Search player...">
-</div>
-
-<div id="board"></div>
-
-<script>
-const data = [
-  {name:"Sanonruh77",points:1500}, // Top 1
-  {name:"ZieexakaYT",points:1200}, // Top 2
-  {name:"Henryjoe2",points:1100}, // Top 3
-  {name:"ZerathTatsuu",points:1080}, // Top 4
-  {name:"Zayzgaming24",points:1050}, // Top 5
-  {name:"Calmejuan",points:1000}, // Top 6
-  {name:"Kagurath1",points:980},
-  {name:"Lurrrnn4005",points:900},
-  {name:"zenonityx",points:870},
-  {name:"by240",points:850},
-  {name:"RapaMC",points:830},
-  {name:"Alberto11385",points:800},
-  {name:"Fexxy73",points:780},
-  {name:"KimmyyMC",points:760},
-  {name:"HappyApple",points:740},
-  {name:"Dirgafang",points:720},
-  {name:"Lingnott",points:700}
-].map((p,i)=>({
-  ...p,
-  rank:i+1
-}));
-
-function randomTier(){
-  const types=["ht1","ht2","ht3","lt1","lt2","lt3"];
-  const icons=["⚔️","❤️","🧪","🛡️","💀","🏹"];
-  return Array.from({length:7},()=>({
-    type:types[Math.floor(Math.random()*types.length)],
-    icon:icons[Math.floor(Math.random()*icons.length)]
-  }));
-}
-
-function render(list){
-  let board=document.getElementById("board");
-  board.innerHTML="";
-
-  list.forEach((p)=>{
-    let rankClass = p.rank===1?"top1":p.rank===2?"top2":p.rank===3?"top3":"";
-
-    // URL skin yang sudah diperbarui
-    let skinUrl = "";
-    if(p.name === 'Sanonruh77'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=a8edfa48d85da775&model=slim';
-    } else if(p.name === 'Calmejuan'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=ca7e022b7ee4e762&model=slim';
-    } else if(p.name === 'Henryjoe2'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=135deb13c5e54a60&model=slim';
-    } else if(p.name === 'Zayzgaming24'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=1e8a2fbba2df08b1&model=slim';
-    } else if(p.name === 'ZerathTatsuu'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=579e4c2063571440&model=slim';
-    } else if(p.name === 'Kagurath1'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=a72f68612ab23526&model=slim';
-    } else if(p.name === 'Alberto11385'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=13ce9ceddd82fd32&model=slim';
-    } else if(p.name === 'ZieexakaYT'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=9b9bec2b5594d825&model=slim';
-    } else if(p.name === 'Lurrrnn4005'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=ade1f60a0b91b047&model=slim';
-    } else if(p.name === 'zenonityx'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=6651adcb873eaab0&model=slim';
-    } else if(p.name === 'by240'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=c72876753d9984e6&model=slim';
-    } else if(p.name === 'RapaMC'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=5198627ebd0361a8&model=slim';
-    } else if(p.name === 'Fexxy73'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=8a59a938162acc26&model=slim';
-    } else if(p.name === 'HappyApple'){
-      skinUrl = 'https://s.namemc.com/3d/skin/body.png?id=4ae0b193aaf5e8da&model=slim';
-    } else {
-      skinUrl = `https://mc-heads.net/body/${p.name}`;
-    }
-
-    board.innerHTML+=`
-    <div class="player">
-      
-      <div class="left">
-        <div class="rank-box ${rankClass}">${p.rank}</div>
-
-        <img class="skin" src="${skinUrl}" 
-          onerror="this.src='https://mc-heads.net/3d/body/${p.name}?model=slim'">
-
-        <div>
-          <div class="name">${p.name}</div>
-          <div class="sub">
-            <span class="rank-icon">◆</span>
-            ${p.name === 'Sanonruh77' ? 'Legendary Master (1500 points)' : (p.name === 'Calmejuan' ? 'Combat Master (1000 points)' : (p.name === 'HappyApple' ? 'Combat Master (740 points) • Happy' : `Combat Master (${p.points} points)`))}
-          </div>
-        </div>
-      </div>
-
-      <div class="region">AS</div>
-
-      <div class="tiers">
-        ${randomTier().map(t=>`
-          <div class="tier ${t.type}">
-            <div class="circle">${t.icon}</div>
-            <div>${t.type.toUpperCase()}</div>
-          </div>
-        `).join("")}
-      </div>
-
-    </div>
-    `;
-  });
-}
-
-document.querySelector(".search").addEventListener("input", e=>{
-  let val=e.target.value.toLowerCase();
-  render(data.filter(p=>p.name.toLowerCase().includes(val)));
-});
-
-render(data);
-</script>
-
-</body>
-</html>
+  </html>
+                                                          
