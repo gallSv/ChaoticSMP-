@@ -1,2 +1,0 @@
-# ChaoticSMP-
-TierChaoticSMP 
